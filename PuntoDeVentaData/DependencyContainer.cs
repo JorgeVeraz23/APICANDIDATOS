@@ -1,7 +1,9 @@
-﻿using Data.Interfaces.CatalogsInterfaces;
+﻿using Data.Interfaces.ApiCandidatosInterfaces;
+using Data.Interfaces.CatalogsInterfaces;
 using Data.Interfaces.SecurityInterfaces;
 using Data.Interfaces.TemplateInterfaces;
 using Data.Interfaces.UserInterfaces;
+using Data.Repository.APICandidatosRepository;
 using Data.Repository.CatalogsRepository;
 using Data.Repository.TemplateRepository;
 using Data.Repository.UtilitiesRepository;
@@ -40,6 +42,19 @@ namespace Data
 
             services.AddScoped<UserInterface, UserRepository>();
             services.AddScoped<GeneralCatalogsInterface, GeneralCatalogsRepository>();
+
+            #region API CANDIDATOS
+            services.AddScoped<CandidatoInterface, CandidatoRepository>().Reverse();
+            services.AddScoped<PartidoInterface, PartidoRepository>().Reverse();
+            services.AddScoped<TrayectoriaInterface, TrayectoriaRepository>().Reverse();
+            services.AddScoped<TransparienciaInterface, TransparienciaRepository>().Reverse();
+            services.AddScoped<PropuestaInterface, PropuestaRepository>().Reverse();
+            services.AddScoped<EventoInterface, EventoRepository>().Reverse();
+            services.AddScoped<RedSocialInterface, RedSocialRepository>().Reverse();
+            services.AddScoped<CargoInterface, CargoRepository>().Reverse();
+            services.AddScoped<ApoyoInterface, ApoyoRepository>().Reverse();
+            services.AddScoped<PocisionInterface, PocisionRepository>().Reverse();
+            #endregion
 
             return services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
