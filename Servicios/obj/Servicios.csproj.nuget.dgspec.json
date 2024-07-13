@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\USER\\source\\repos\\PuntoDeVenta1\\Servicios\\Servicios.csproj": {}
+    "C:\\Users\\USER\\Documents\\repo\\ApiCandidatos\\Servicios\\Servicios.csproj": {}
   },
   "projects": {
-    "C:\\Users\\USER\\source\\repos\\PuntoDeVenta1\\Servicios\\Servicios.csproj": {
+    "C:\\Users\\USER\\Documents\\repo\\ApiCandidatos\\Servicios\\Servicios.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USER\\source\\repos\\PuntoDeVenta1\\Servicios\\Servicios.csproj",
+        "projectUniqueName": "C:\\Users\\USER\\Documents\\repo\\ApiCandidatos\\Servicios\\Servicios.csproj",
         "projectName": "Servicios",
-        "projectPath": "C:\\Users\\USER\\source\\repos\\PuntoDeVenta1\\Servicios\\Servicios.csproj",
+        "projectPath": "C:\\Users\\USER\\Documents\\repo\\ApiCandidatos\\Servicios\\Servicios.csproj",
         "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USER\\source\\repos\\PuntoDeVenta1\\Servicios\\obj\\",
+        "outputPath": "C:\\Users\\USER\\Documents\\repo\\ApiCandidatos\\Servicios\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",

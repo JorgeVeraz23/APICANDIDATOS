@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NKcQo0PVSItSsVDHP1kLZQMWVKgqhmrCus3mxYWNiNZiXenelF0EjcwcEHg5QS2irGDoyZ6fVH0X9HbMh88kKg==",
+  "dgSpecHash": "u3cayd8tiJ84rvxupqFbEWmxLFpTSkU8UF7jNWP8BwLwigx47O4aBtPWibpdIks2xk7tG0/HwkaCDL09TMQVVg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\USER\\source\\repos\\PuntoDeVenta1\\PuntoDeVentaData\\Data.csproj",
+  "projectFilePath": "C:\\Users\\USER\\Documents\\repo\\ApiCandidatos\\PuntoDeVentaData\\Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\USER\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\awssdk.core\\3.7.303.26\\awssdk.core.3.7.303.26.nupkg.sha512",

@@ -10703,11 +10703,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\USER\\source\\repos\\PuntoDeVenta1\\PuntoDeVentaAPI\\PuntoDeVentaAPI.csproj",
+      "projectUniqueName": "C:\\Users\\USER\\Documents\\repo\\ApiCandidatos\\PuntoDeVentaAPI\\PuntoDeVentaAPI.csproj",
       "projectName": "PuntoDeVentaAPI",
-      "projectPath": "C:\\Users\\USER\\source\\repos\\PuntoDeVenta1\\PuntoDeVentaAPI\\PuntoDeVentaAPI.csproj",
+      "projectPath": "C:\\Users\\USER\\Documents\\repo\\ApiCandidatos\\PuntoDeVentaAPI\\PuntoDeVentaAPI.csproj",
       "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\USER\\source\\repos\\PuntoDeVenta1\\PuntoDeVentaAPI\\obj\\",
+      "outputPath": "C:\\Users\\USER\\Documents\\repo\\ApiCandidatos\\PuntoDeVentaAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -10724,8 +10724,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\USER\\source\\repos\\PuntoDeVenta1\\PuntoDeVentaData\\Data.csproj": {
-              "projectPath": "C:\\Users\\USER\\source\\repos\\PuntoDeVenta1\\PuntoDeVentaData\\Data.csproj"
+            "C:\\Users\\USER\\Documents\\repo\\ApiCandidatos\\PuntoDeVentaData\\Data.csproj": {
+              "projectPath": "C:\\Users\\USER\\Documents\\repo\\ApiCandidatos\\PuntoDeVentaData\\Data.csproj"
             }
           }
         }
