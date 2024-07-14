@@ -50,4 +50,16 @@
 		<ProjectReference Include="..\PuntoDeVentaData\Data.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Controllers\CandidatoController\" />
+	  <Folder Include="Controllers\CargoController\" />
+	  <Folder Include="Controllers\EventoController\" />
+	  <Folder Include="Controllers\TrayectoriaController\" />
+	  <Folder Include="Controllers\TransparienciaController\" />
+	  <Folder Include="Controllers\RedSocialController\" />
+	  <Folder Include="Controllers\PropuestaController\" />
+	  <Folder Include="Controllers\PocisionController\" />
+	  <Folder Include="Controllers\PartidoController\" />
+	</ItemGroup>
+
 </Project>
