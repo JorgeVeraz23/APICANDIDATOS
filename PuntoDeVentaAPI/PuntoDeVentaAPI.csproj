@@ -51,7 +51,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Controllers\EventoController\" />
 	  <Folder Include="Controllers\TrayectoriaController\" />
 	  <Folder Include="Controllers\TransparienciaController\" />
 	  <Folder Include="Controllers\RedSocialController\" />
