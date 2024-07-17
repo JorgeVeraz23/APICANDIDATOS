@@ -24,6 +24,6 @@ namespace Data.Dto.EventoDTO
         public string Titulo { get; set; }
         public DateTime Fecha { get; set; }
         public string Ubicacion { get; set; }
-        public string NombreEvento { get; set; }
+        public string NombreCandidato { get; set; }
     }
 }
