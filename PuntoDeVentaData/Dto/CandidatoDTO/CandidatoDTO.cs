@@ -32,8 +32,9 @@ namespace Data.Dto.CandidatoDTO
         public string InformacionDeContacto { get; set; } = "";
         public string NombrePartido { get; set; } = "";
         public string Cargo { get; set; } = "";
-        public string NombreTransparencia { get; set; } = "";
-
+        public string DeclaracionDeBienes { get; set; } = "";
+        public bool InvolucradoEnEscandalos { get; set; }
+        public string EvaluacionesDeEtica { get; set; } = "";
 
     }
 }

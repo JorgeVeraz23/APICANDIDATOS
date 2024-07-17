@@ -51,7 +51,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Controllers\CandidatoController\" />
 	  <Folder Include="Controllers\CargoController\" />
 	  <Folder Include="Controllers\EventoController\" />
 	  <Folder Include="Controllers\TrayectoriaController\" />

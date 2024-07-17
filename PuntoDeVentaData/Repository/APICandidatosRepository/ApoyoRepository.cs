@@ -1,11 +1,11 @@
-﻿using Castle.Core.Configuration;
-using Data.Dto.ApoyoDTO;
+﻿using Data.Dto.ApoyoDTO;
 using Data.Entities.Apoyo;
 using Data.Interfaces.ApiCandidatosInterfaces;
 using Data.Interfaces.SecurityInterfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using PuntoDeVentaData.Dto.UtilitiesDTO;
 using PuntoDeVentaData.Entities.Security;
 using System;

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Data;
+using Data.Dto.ApoyoDTO;
 using Data.Interfaces.ApiCandidatosInterfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -8,6 +9,7 @@ using NLog;
 using PuntoDeVentaAPI.Services;
 using PuntoDeVentaData.Dto.UtilitiesDTO;
 using PuntoDeVentaData.Entities.Security;
+using System.Net;
 
 namespace PuntoDeVentaAPI.Controllers.ApoyoController
 {
@@ -58,6 +60,92 @@ namespace PuntoDeVentaAPI.Controllers.ApoyoController
                 return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al listar los apoyos"));
             }
         }
+
+        [HttpGet]
+        [Route("GetApoyoById")]
+        public async Task<ActionResult> Get(long id)
+        {
+            try
+            {
+                var result = await _apoyoInterface.GetApoyo(id);
+                return Ok(result);
+                
+            }catch (Exception ex)
+            {
+                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al conultar el apoyo seleccionado"));
+            }
+        }
+
+        [HttpPost]
+        [Route("CreateApoyo")]
+        public async Task<ActionResult> CreateApoyo(ApoyoDTO apoyo)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return UnprocessableEntity(ModelState);
+                }
+
+                var resultSave = await _apoyoInterface.Create(apoyo);
+                if (resultSave.Success)
+                {
+                    return Ok(new MessageInfoDTO().AccionCompletada(resultSave.Message ?? string.Empty));
+                }
+                else
+                {
+                    return BadRequest(new MessageInfoDTO().AccionFallida(resultSave.Message ?? string.Empty, (int)HttpStatusCode.BadRequest));
+                }
+            }catch(Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al crear los apoyos"));
+            }
+        }
+
+        [HttpDelete]
+        [Route("EliminarApoyo")]
+        public async Task<ActionResult> EliminarApoyo(long idApoyo)
+        {
+            try
+            {
+                var resultDelete = await _apoyoInterface.Desactive(idApoyo);
+                if (resultDelete.Success)
+                {
+                    return Ok(resultDelete.Success);
+                }
+                else
+                {
+                    return BadRequest(resultDelete.Message);
+                }
+            }catch(Exception ex) {
+                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al eliminar los apoyos"));
+            }
+
+        }
+
+        [HttpPut]
+        [Route("ActualizarApoyo")]
+        public async Task<ActionResult> ActualizarApoyos(ApoyoDTO apoyoDTO)
+        {
+            try
+            {
+                var resultSave = await _apoyoInterface.Edit(apoyoDTO);
+                if (resultSave.Success)
+                {
+                    return Ok(resultSave.Success);
+                }
+                else
+                {
+                    return BadRequest(resultSave.Message);
+                }
+            }catch(Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Errror al actualizar los apoyos"));
+            }
+        }
+
+
+        
 
 
 
