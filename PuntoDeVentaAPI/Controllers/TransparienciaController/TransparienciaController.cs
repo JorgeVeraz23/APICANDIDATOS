@@ -8,39 +8,40 @@ using Microsoft.AspNetCore.Mvc;
 using NLog;
 using PuntoDeVentaAPI.Services;
 using PuntoDeVentaData.Dto.UtilitiesDTO;
-using Data.Dto.EventoDTO;
+using Data.Dto.ExperienciaDTO;
 using System.Net;
-using Data.Dto.PartidoPoliticoDTO;
+using Data.Dto.TransparienciaDTO;
 
-namespace PuntoDeVentaAPI.Controllers.PartidoController
+namespace PuntoDeVentaAPI.Controllers.TransparienciaController
 {
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class PartidoController : ControllerBase
+    public class TransparienciaController : ControllerBase
     {
 
-        private readonly PartidoInterface _partidoInterface;
+        private readonly TransparienciaInterface _transparienciaInterface;
         private readonly ApplicationDbContext _context;
         private readonly IServiceProvider _service;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
         private readonly ApplicationUserManager _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private static Logger _log = LogManager.GetLogger("PartidoController");
+        private static Logger _log = LogManager.GetLogger("TransparienciaController");
         MessageInfoDTO infoDTO = new MessageInfoDTO();
         public readonly string _usuario;
         private readonly string _ip;
         private readonly string _nombreController;
 
-        public PartidoController(PartidoInterface partidoInterface, ApplicationDbContext applicationDbContext, IHttpContextAccessor httpContextAccessor, ApplicationUserManager userManager, IServiceProvider service, IMapper mapper, IConfiguration configuration)
+
+        public TransparienciaController(TransparienciaInterface transparienciaInterface, ApplicationDbContext applicationDbContext, IHttpContextAccessor httpContextAccessor, ApplicationUserManager userManager, IServiceProvider service, IMapper mapper, IConfiguration configuration)
         {
-            _partidoInterface = partidoInterface;
+            _transparienciaInterface = transparienciaInterface;
             this._context = applicationDbContext;
             _service = service;
             _mapper = mapper;
             _configuration = configuration;
-            _nombreController = "PartidoController";
+            _nombreController = "TransparienciaController";
             _httpContextAccessor = httpContextAccessor;
             _ip = _httpContextAccessor?.HttpContext?.Connection.RemoteIpAddress?.ToString() ?? string.Empty;
             _usuario = Task.Run(async () =>
@@ -48,24 +49,25 @@ namespace PuntoDeVentaAPI.Controllers.PartidoController
             c.Type.Contains("email", StringComparison.CurrentCultureIgnoreCase))?.Value ?? ""))?.UserName ?? "Desconocido").Result;
         }
 
+
         [HttpGet]
-        [Route("GetAllPartido")]
-        public async Task<ActionResult> GetAllPartido()
+        [Route("GetAllTranspariencia")]
+        public async Task<ActionResult> GetAllTranspariencia()
         {
             try
             {
-                var result = await _partidoInterface.GetAll();
+                var result = await _transparienciaInterface.GetAll();
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al listar los partidos"));
+                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al listar la transpariencia"));
             }
         }
 
         [HttpPost]
-        [Route("CrearPartidos")]
-        public async Task<ActionResult> CrearPartidos(PartidoDTO partido)
+        [Route("CrearTranspariencia")]
+        public async Task<ActionResult> CrearTranspariencia(TransparienciaDTO transpariencia)
         {
             try
             {
@@ -73,7 +75,7 @@ namespace PuntoDeVentaAPI.Controllers.PartidoController
                 {
                     return UnprocessableEntity(ModelState);
                 }
-                var resultSave = await _partidoInterface.Create(partido);
+                var resultSave = await _transparienciaInterface.Create(transpariencia);
                 if (resultSave.Success)
                 {
                     return Ok(new MessageInfoDTO().AccionCompletada(resultSave.Message ?? string.Empty));
@@ -86,33 +88,33 @@ namespace PuntoDeVentaAPI.Controllers.PartidoController
             }
             catch (Exception ex)
             {
-                return StatusCode((int)HttpStatusCode.BadRequest, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Errror al crear los partidos"));
+                return StatusCode((int)HttpStatusCode.BadRequest, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Errror al crear la transpariencia"));
             }
         }
 
         [HttpGet]
-        [Route("GetPartidos")]
-        public async Task<ActionResult> GetPartidos(long IdPartido)
+        [Route("GetTranspariencia")]
+        public async Task<ActionResult> GetTranspariencia(long IdTranspariencia)
         {
             try
             {
-                var result = await _partidoInterface.Get(IdPartido);
+                var result = await _transparienciaInterface.Get(IdTranspariencia);
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al consultar el partido seleccionado"));
+                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al consultar la transpariencia"));
             }
         }
 
 
         [HttpDelete]
-        [Route("EliminarPartido")]
-        public async Task<ActionResult> EliminarPartido(long IdPartidos)
+        [Route("EliminarTranspariencia")]
+        public async Task<ActionResult> EliminarTranspariencia(long IdTranspariencia)
         {
             try
             {
-                var resultDelete = await _partidoInterface.Desactive(IdPartidos);
+                var resultDelete = await _transparienciaInterface.Desactive(IdTranspariencia);
                 if (resultDelete.Success)
                 {
                     return Ok(resultDelete.Success);
@@ -124,17 +126,17 @@ namespace PuntoDeVentaAPI.Controllers.PartidoController
             }
             catch (Exception ex)
             {
-                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al eliminar el partido"));
+                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al eliminar la transpariencia"));
             }
         }
 
         [HttpPut]
-        [Route("ActualizarPartido")]
-        public async Task<ActionResult> ActualizarPartido(PartidoDTO partido)
+        [Route("ActualizarTranspariencia")]
+        public async Task<ActionResult> ActualizarTranspariencia(TransparienciaDTO transpariencia)
         {
             try
             {
-                var resultSave = await _partidoInterface.Edit(partido);
+                var resultSave = await _transparienciaInterface.Edit(transpariencia);
                 if (resultSave.Success)
                 {
                     return Ok(resultSave.Success);
@@ -146,7 +148,7 @@ namespace PuntoDeVentaAPI.Controllers.PartidoController
             }
             catch (Exception ex)
             {
-                return StatusCode((int)HttpStatusCode.BadRequest, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Errror al actualizar los partidos"));
+                return StatusCode((int)HttpStatusCode.BadRequest, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al actualizar la transpariencia"));
             }
         }
     }

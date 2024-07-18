@@ -14,4 +14,15 @@ namespace Data.Dto.TransparienciaDTO
         public bool InvolucradoEnEscandalos { get; set; }
         public string EvaluacionesDeEtica { get; set; } = "";
     }
+
+
+    public class MostrarTransparienciaDTO
+    {
+        public long IdTranspariencia { get; set; }
+        public string DeclaracionesDeBienes { get; set; } = "";
+        public bool InvolucradoEnEscandalos { get; set; }
+        public string EvaluacionesDeEtica { get; set; } = "";
+        public string NombreCandidato { get; set; } = "";
+
+    }
 }

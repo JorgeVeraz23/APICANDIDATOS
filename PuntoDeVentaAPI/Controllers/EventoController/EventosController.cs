@@ -63,8 +63,8 @@ namespace PuntoDeVentaAPI.Controllers.EventoController
         }
 
         [HttpPost]
-        [Route("CrearCargo")]
-        public async Task<ActionResult> CrearCargo(EventoDTO evento)
+        [Route("CrearEvento")]
+        public async Task<ActionResult> CrearEvento(EventoDTO evento)
         {
             try
             {

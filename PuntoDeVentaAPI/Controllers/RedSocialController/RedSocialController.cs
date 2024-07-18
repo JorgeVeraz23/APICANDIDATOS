@@ -8,39 +8,40 @@ using Microsoft.AspNetCore.Mvc;
 using NLog;
 using PuntoDeVentaAPI.Services;
 using PuntoDeVentaData.Dto.UtilitiesDTO;
-using Data.Dto.EventoDTO;
+using Data.Dto.PropuestaDTO;
 using System.Net;
-using Data.Dto.PartidoPoliticoDTO;
+using Data.Dto.RedSocialDTO;
 
-namespace PuntoDeVentaAPI.Controllers.PartidoController
+namespace PuntoDeVentaAPI.Controllers.RedSocialController
 {
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class PartidoController : ControllerBase
+    public class RedSocialController : ControllerBase
     {
 
-        private readonly PartidoInterface _partidoInterface;
+        private readonly RedSocialInterface _redSocialInterface;
         private readonly ApplicationDbContext _context;
         private readonly IServiceProvider _service;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
         private readonly ApplicationUserManager _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private static Logger _log = LogManager.GetLogger("PartidoController");
+        private static Logger _log = LogManager.GetLogger("RedSocialController");
         MessageInfoDTO infoDTO = new MessageInfoDTO();
         public readonly string _usuario;
         private readonly string _ip;
         private readonly string _nombreController;
 
-        public PartidoController(PartidoInterface partidoInterface, ApplicationDbContext applicationDbContext, IHttpContextAccessor httpContextAccessor, ApplicationUserManager userManager, IServiceProvider service, IMapper mapper, IConfiguration configuration)
+
+        public RedSocialController(RedSocialInterface redSocialInterface, ApplicationDbContext applicationDbContext, IHttpContextAccessor httpContextAccessor, ApplicationUserManager userManager, IServiceProvider service, IMapper mapper, IConfiguration configuration)
         {
-            _partidoInterface = partidoInterface;
+            _redSocialInterface = redSocialInterface;
             this._context = applicationDbContext;
             _service = service;
             _mapper = mapper;
             _configuration = configuration;
-            _nombreController = "PartidoController";
+            _nombreController = "RedSocialController";
             _httpContextAccessor = httpContextAccessor;
             _ip = _httpContextAccessor?.HttpContext?.Connection.RemoteIpAddress?.ToString() ?? string.Empty;
             _usuario = Task.Run(async () =>
@@ -49,23 +50,23 @@ namespace PuntoDeVentaAPI.Controllers.PartidoController
         }
 
         [HttpGet]
-        [Route("GetAllPartido")]
-        public async Task<ActionResult> GetAllPartido()
+        [Route("GetAllRedSocial")]
+        public async Task<ActionResult> GetAllRedSocial()
         {
             try
             {
-                var result = await _partidoInterface.GetAll();
+                var result = await _redSocialInterface.GetAll();
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al listar los partidos"));
+                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al listar la red social"));
             }
         }
 
         [HttpPost]
-        [Route("CrearPartidos")]
-        public async Task<ActionResult> CrearPartidos(PartidoDTO partido)
+        [Route("CrearRedSocial")]
+        public async Task<ActionResult> CrearRedSocial(RedSocialDTO redSocial)
         {
             try
             {
@@ -73,7 +74,7 @@ namespace PuntoDeVentaAPI.Controllers.PartidoController
                 {
                     return UnprocessableEntity(ModelState);
                 }
-                var resultSave = await _partidoInterface.Create(partido);
+                var resultSave = await _redSocialInterface.Create(redSocial);
                 if (resultSave.Success)
                 {
                     return Ok(new MessageInfoDTO().AccionCompletada(resultSave.Message ?? string.Empty));
@@ -86,33 +87,33 @@ namespace PuntoDeVentaAPI.Controllers.PartidoController
             }
             catch (Exception ex)
             {
-                return StatusCode((int)HttpStatusCode.BadRequest, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Errror al crear los partidos"));
+                return StatusCode((int)HttpStatusCode.BadRequest, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Errror al crear la red social"));
             }
         }
 
         [HttpGet]
-        [Route("GetPartidos")]
-        public async Task<ActionResult> GetPartidos(long IdPartido)
+        [Route("GetRedSocial")]
+        public async Task<ActionResult> GetRedSocial(long IdRedSocial)
         {
             try
             {
-                var result = await _partidoInterface.Get(IdPartido);
+                var result = await _redSocialInterface.Get(IdRedSocial);
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al consultar el partido seleccionado"));
+                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al consultar la red social seleccionada"));
             }
         }
 
 
         [HttpDelete]
-        [Route("EliminarPartido")]
-        public async Task<ActionResult> EliminarPartido(long IdPartidos)
+        [Route("EliminarRedSocial")]
+        public async Task<ActionResult> EliminarRedSocial(long IdRedSocial)
         {
             try
             {
-                var resultDelete = await _partidoInterface.Desactive(IdPartidos);
+                var resultDelete = await _redSocialInterface.Desactive(IdRedSocial);
                 if (resultDelete.Success)
                 {
                     return Ok(resultDelete.Success);
@@ -124,17 +125,17 @@ namespace PuntoDeVentaAPI.Controllers.PartidoController
             }
             catch (Exception ex)
             {
-                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al eliminar el partido"));
+                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al eliminar la red social"));
             }
         }
 
         [HttpPut]
-        [Route("ActualizarPartido")]
-        public async Task<ActionResult> ActualizarPartido(PartidoDTO partido)
+        [Route("ActualizarRedSocial")]
+        public async Task<ActionResult> ActualizarRedSocial(RedSocialDTO redSocial)
         {
             try
             {
-                var resultSave = await _partidoInterface.Edit(partido);
+                var resultSave = await _redSocialInterface.Edit(redSocial);
                 if (resultSave.Success)
                 {
                     return Ok(resultSave.Success);
@@ -146,8 +147,9 @@ namespace PuntoDeVentaAPI.Controllers.PartidoController
             }
             catch (Exception ex)
             {
-                return StatusCode((int)HttpStatusCode.BadRequest, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Errror al actualizar los partidos"));
+                return StatusCode((int)HttpStatusCode.BadRequest, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al actualizar la red social"));
             }
         }
+
     }
 }

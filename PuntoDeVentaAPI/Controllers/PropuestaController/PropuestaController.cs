@@ -8,39 +8,38 @@ using Microsoft.AspNetCore.Mvc;
 using NLog;
 using PuntoDeVentaAPI.Services;
 using PuntoDeVentaData.Dto.UtilitiesDTO;
-using Data.Dto.EventoDTO;
-using System.Net;
 using Data.Dto.PartidoPoliticoDTO;
+using System.Net;
+using Data.Dto.PropuestaDTO;
 
-namespace PuntoDeVentaAPI.Controllers.PartidoController
+namespace PuntoDeVentaAPI.Controllers.PropuestaController
 {
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class PartidoController : ControllerBase
+    public class PropuestaController : ControllerBase
     {
-
-        private readonly PartidoInterface _partidoInterface;
+        private readonly PropuestaInterface _propuestaInterface;
         private readonly ApplicationDbContext _context;
         private readonly IServiceProvider _service;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
         private readonly ApplicationUserManager _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private static Logger _log = LogManager.GetLogger("PartidoController");
+        private static Logger _log = LogManager.GetLogger("PropuestaController");
         MessageInfoDTO infoDTO = new MessageInfoDTO();
         public readonly string _usuario;
         private readonly string _ip;
         private readonly string _nombreController;
 
-        public PartidoController(PartidoInterface partidoInterface, ApplicationDbContext applicationDbContext, IHttpContextAccessor httpContextAccessor, ApplicationUserManager userManager, IServiceProvider service, IMapper mapper, IConfiguration configuration)
+        public PropuestaController(PropuestaInterface propuestaInterface, ApplicationDbContext applicationDbContext, IHttpContextAccessor httpContextAccessor, ApplicationUserManager userManager, IServiceProvider service, IMapper mapper, IConfiguration configuration)
         {
-            _partidoInterface = partidoInterface;
+            _propuestaInterface = propuestaInterface;
             this._context = applicationDbContext;
             _service = service;
             _mapper = mapper;
             _configuration = configuration;
-            _nombreController = "PartidoController";
+            _nombreController = "PropuestaController";
             _httpContextAccessor = httpContextAccessor;
             _ip = _httpContextAccessor?.HttpContext?.Connection.RemoteIpAddress?.ToString() ?? string.Empty;
             _usuario = Task.Run(async () =>
@@ -49,23 +48,23 @@ namespace PuntoDeVentaAPI.Controllers.PartidoController
         }
 
         [HttpGet]
-        [Route("GetAllPartido")]
-        public async Task<ActionResult> GetAllPartido()
+        [Route("GetAllPropuesta")]
+        public async Task<ActionResult> GetAllPropuesta()
         {
             try
             {
-                var result = await _partidoInterface.GetAll();
+                var result = await _propuestaInterface.GetAll();
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al listar los partidos"));
+                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al listar las propuestas"));
             }
         }
 
         [HttpPost]
-        [Route("CrearPartidos")]
-        public async Task<ActionResult> CrearPartidos(PartidoDTO partido)
+        [Route("CrearPropuesta")]
+        public async Task<ActionResult> CrearPropuesta(PropuestaDTO propuesta)
         {
             try
             {
@@ -73,7 +72,7 @@ namespace PuntoDeVentaAPI.Controllers.PartidoController
                 {
                     return UnprocessableEntity(ModelState);
                 }
-                var resultSave = await _partidoInterface.Create(partido);
+                var resultSave = await _propuestaInterface.Create(propuesta);
                 if (resultSave.Success)
                 {
                     return Ok(new MessageInfoDTO().AccionCompletada(resultSave.Message ?? string.Empty));
@@ -86,33 +85,33 @@ namespace PuntoDeVentaAPI.Controllers.PartidoController
             }
             catch (Exception ex)
             {
-                return StatusCode((int)HttpStatusCode.BadRequest, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Errror al crear los partidos"));
+                return StatusCode((int)HttpStatusCode.BadRequest, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Errror al crear las propuestas"));
             }
         }
 
         [HttpGet]
-        [Route("GetPartidos")]
-        public async Task<ActionResult> GetPartidos(long IdPartido)
+        [Route("GetPropuesta")]
+        public async Task<ActionResult> GetPropuesta(long IdPropuesta)
         {
             try
             {
-                var result = await _partidoInterface.Get(IdPartido);
+                var result = await _propuestaInterface.Get(IdPropuesta);
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al consultar el partido seleccionado"));
+                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al consultar la propuesta seleccionado"));
             }
         }
 
 
         [HttpDelete]
-        [Route("EliminarPartido")]
-        public async Task<ActionResult> EliminarPartido(long IdPartidos)
+        [Route("EliminarPropuesta")]
+        public async Task<ActionResult> EliminarPropuesta(long IdPropuesta)
         {
             try
             {
-                var resultDelete = await _partidoInterface.Desactive(IdPartidos);
+                var resultDelete = await _propuestaInterface.Desactive(IdPropuesta);
                 if (resultDelete.Success)
                 {
                     return Ok(resultDelete.Success);
@@ -124,17 +123,17 @@ namespace PuntoDeVentaAPI.Controllers.PartidoController
             }
             catch (Exception ex)
             {
-                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al eliminar el partido"));
+                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al eliminar la propuesta"));
             }
         }
 
         [HttpPut]
-        [Route("ActualizarPartido")]
-        public async Task<ActionResult> ActualizarPartido(PartidoDTO partido)
+        [Route("ActualizarPropuesta")]
+        public async Task<ActionResult> ActualizarPropuesta(PropuestaDTO propuesta)
         {
             try
             {
-                var resultSave = await _partidoInterface.Edit(partido);
+                var resultSave = await _propuestaInterface.Edit(propuesta);
                 if (resultSave.Success)
                 {
                     return Ok(resultSave.Success);
@@ -146,8 +145,10 @@ namespace PuntoDeVentaAPI.Controllers.PartidoController
             }
             catch (Exception ex)
             {
-                return StatusCode((int)HttpStatusCode.BadRequest, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Errror al actualizar los partidos"));
+                return StatusCode((int)HttpStatusCode.BadRequest, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al actualizar las propuestas"));
             }
         }
+
+
     }
 }

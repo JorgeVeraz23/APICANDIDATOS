@@ -8,39 +8,40 @@ using Microsoft.AspNetCore.Mvc;
 using NLog;
 using PuntoDeVentaAPI.Services;
 using PuntoDeVentaData.Dto.UtilitiesDTO;
-using Data.Dto.EventoDTO;
+using Data.Dto.RedSocialDTO;
 using System.Net;
-using Data.Dto.PartidoPoliticoDTO;
+using Data.Dto.ExperienciaDTO;
 
-namespace PuntoDeVentaAPI.Controllers.PartidoController
+namespace PuntoDeVentaAPI.Controllers.TrayectoriaController
 {
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class PartidoController : ControllerBase
+    public class TrayectoriaController : ControllerBase
     {
 
-        private readonly PartidoInterface _partidoInterface;
+        private readonly TrayectoriaInterface _trayectoriaInterface;
         private readonly ApplicationDbContext _context;
         private readonly IServiceProvider _service;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
         private readonly ApplicationUserManager _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private static Logger _log = LogManager.GetLogger("PartidoController");
+        private static Logger _log = LogManager.GetLogger("TrayectoriaController");
         MessageInfoDTO infoDTO = new MessageInfoDTO();
         public readonly string _usuario;
         private readonly string _ip;
         private readonly string _nombreController;
 
-        public PartidoController(PartidoInterface partidoInterface, ApplicationDbContext applicationDbContext, IHttpContextAccessor httpContextAccessor, ApplicationUserManager userManager, IServiceProvider service, IMapper mapper, IConfiguration configuration)
+
+        public TrayectoriaController(TrayectoriaInterface trayectoriaInterface, ApplicationDbContext applicationDbContext, IHttpContextAccessor httpContextAccessor, ApplicationUserManager userManager, IServiceProvider service, IMapper mapper, IConfiguration configuration)
         {
-            _partidoInterface = partidoInterface;
+            _trayectoriaInterface = trayectoriaInterface;
             this._context = applicationDbContext;
             _service = service;
             _mapper = mapper;
             _configuration = configuration;
-            _nombreController = "PartidoController";
+            _nombreController = "TrayectoriaController";
             _httpContextAccessor = httpContextAccessor;
             _ip = _httpContextAccessor?.HttpContext?.Connection.RemoteIpAddress?.ToString() ?? string.Empty;
             _usuario = Task.Run(async () =>
@@ -49,23 +50,23 @@ namespace PuntoDeVentaAPI.Controllers.PartidoController
         }
 
         [HttpGet]
-        [Route("GetAllPartido")]
-        public async Task<ActionResult> GetAllPartido()
+        [Route("GetAllTrayectoria")]
+        public async Task<ActionResult> GetAllTrayectoria()
         {
             try
             {
-                var result = await _partidoInterface.GetAll();
+                var result = await _trayectoriaInterface.GetAll();
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al listar los partidos"));
+                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al listar la trayectoria"));
             }
         }
 
         [HttpPost]
-        [Route("CrearPartidos")]
-        public async Task<ActionResult> CrearPartidos(PartidoDTO partido)
+        [Route("CrearTrayectoria")]
+        public async Task<ActionResult> CrearTrayectoria(TrayectoriaDTO trayectoria)
         {
             try
             {
@@ -73,7 +74,7 @@ namespace PuntoDeVentaAPI.Controllers.PartidoController
                 {
                     return UnprocessableEntity(ModelState);
                 }
-                var resultSave = await _partidoInterface.Create(partido);
+                var resultSave = await _trayectoriaInterface.Create(trayectoria);
                 if (resultSave.Success)
                 {
                     return Ok(new MessageInfoDTO().AccionCompletada(resultSave.Message ?? string.Empty));
@@ -86,33 +87,33 @@ namespace PuntoDeVentaAPI.Controllers.PartidoController
             }
             catch (Exception ex)
             {
-                return StatusCode((int)HttpStatusCode.BadRequest, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Errror al crear los partidos"));
+                return StatusCode((int)HttpStatusCode.BadRequest, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Errror al crear la trayectoria"));
             }
         }
 
         [HttpGet]
-        [Route("GetPartidos")]
-        public async Task<ActionResult> GetPartidos(long IdPartido)
+        [Route("GetTrayectoria")]
+        public async Task<ActionResult> GetTrayectoria(long IdTrayectoria)
         {
             try
             {
-                var result = await _partidoInterface.Get(IdPartido);
+                var result = await _trayectoriaInterface.Get(IdTrayectoria);
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al consultar el partido seleccionado"));
+                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al consultar la trayectoria"));
             }
         }
 
 
         [HttpDelete]
-        [Route("EliminarPartido")]
-        public async Task<ActionResult> EliminarPartido(long IdPartidos)
+        [Route("EliminarTrayectoria")]
+        public async Task<ActionResult> EliminarTrayectoria(long IdTrayectoria)
         {
             try
             {
-                var resultDelete = await _partidoInterface.Desactive(IdPartidos);
+                var resultDelete = await _trayectoriaInterface.Desactive(IdTrayectoria);
                 if (resultDelete.Success)
                 {
                     return Ok(resultDelete.Success);
@@ -124,17 +125,17 @@ namespace PuntoDeVentaAPI.Controllers.PartidoController
             }
             catch (Exception ex)
             {
-                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al eliminar el partido"));
+                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al eliminar la trayectoria"));
             }
         }
 
         [HttpPut]
-        [Route("ActualizarPartido")]
-        public async Task<ActionResult> ActualizarPartido(PartidoDTO partido)
+        [Route("ActualizarTrayectoria")]
+        public async Task<ActionResult> ActualizarTrayectoria(TrayectoriaDTO trayectoria)
         {
             try
             {
-                var resultSave = await _partidoInterface.Edit(partido);
+                var resultSave = await _trayectoriaInterface.Edit(trayectoria);
                 if (resultSave.Success)
                 {
                     return Ok(resultSave.Success);
@@ -146,8 +147,12 @@ namespace PuntoDeVentaAPI.Controllers.PartidoController
             }
             catch (Exception ex)
             {
-                return StatusCode((int)HttpStatusCode.BadRequest, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Errror al actualizar los partidos"));
+                return StatusCode((int)HttpStatusCode.BadRequest, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al actualizar la red social"));
             }
         }
+
+
+
+
     }
 }

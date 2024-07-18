@@ -16,4 +16,13 @@ namespace Data.Dto.ExperienciaDTO
         public string Descripcion { get; set; } = "";
         public long IdCandidato { get; set; }
     }
+
+    public class MostrarTrayectoriaDTO
+    {
+        public long IdTrayectoria { get; set; }
+
+        public string Titulo { get; set; } = "";
+        public string Descripcion { get; set; } = "";
+        public string NombreCandidato { get; set; } = "";
+    }
 }
