@@ -62,6 +62,21 @@ namespace PuntoDeVentaAPI.Controllers.CandidatoController
             }
         }
 
+
+        [HttpGet]
+        [Route("KeyValueCandidato")]
+        public async Task<ActionResult> KeyValueCandidato()
+        {
+            try
+            {
+                var result = await _candidatoInterface.KeyValue();
+                return Ok(result);
+            }catch(Exception ex)
+            {
+                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al listar los candidatos en el selector"));
+            }
+        }
+
         [HttpPost]
         [Route("CrearCandidato")]
         public async Task<ActionResult> CrearCandidato(CandidatoDTO candidato)

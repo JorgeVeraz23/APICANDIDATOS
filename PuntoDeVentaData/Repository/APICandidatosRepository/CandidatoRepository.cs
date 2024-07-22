@@ -1,5 +1,6 @@
 ﻿using Data.Dto.ApoyoDTO;
 using Data.Dto.CandidatoDTO;
+using Data.Dto.UtilitiesDTO;
 using Data.Entities.Apoyo;
 using Data.Entities.Candidatos;
 using Data.Interfaces.ApiCandidatosInterfaces;
@@ -166,6 +167,17 @@ namespace Data.Repository.APICandidatosRepository
             }).ToListAsync();
 
             return candidatos;
+        }
+
+        public async Task<List<KeyValueDTO>> KeyValue()
+        {
+            var cantidatoSelector = await _context.Candidatos.Where(x => x.Active).Select(c => new KeyValueDTO
+            {
+                Key = c.IdCandidato,
+                Value = c.NombreCandidato,
+            }).ToListAsync();
+
+            return cantidatoSelector;
         }
     }
 }

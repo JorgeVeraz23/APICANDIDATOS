@@ -1,5 +1,6 @@
 ﻿using Data.Dto.ApoyoDTO;
 using Data.Dto.CandidatoDTO;
+using Data.Dto.UtilitiesDTO;
 using PuntoDeVentaData.Dto.UtilitiesDTO;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace Data.Interfaces.ApiCandidatosInterfaces
     public interface CandidatoInterface
     {
         public Task<List<MostrarCandidatoDTO>> GetAll();
+        public Task<List<KeyValueDTO>> KeyValue();
         public Task<CandidatoDTO> Get(long id);
         public Task<MessageInfoDTO> Desactive(long id);
         public Task<MessageInfoDTO> Create(CandidatoDTO data);
