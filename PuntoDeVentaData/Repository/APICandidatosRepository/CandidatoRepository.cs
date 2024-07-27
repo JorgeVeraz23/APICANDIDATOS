@@ -3,6 +3,7 @@ using Data.Dto.CandidatoDTO;
 using Data.Dto.UtilitiesDTO;
 using Data.Entities.Apoyo;
 using Data.Entities.Candidatos;
+using Data.Entities.Transpariencia;
 using Data.Interfaces.ApiCandidatosInterfaces;
 using Data.Interfaces.SecurityInterfaces;
 using Microsoft.AspNetCore.Http;
@@ -65,6 +66,8 @@ namespace Data.Repository.APICandidatosRepository
                 return infoDTO;
             }
 
+           
+
             Candidato candidato = new Candidato();
             candidato.Active = true;
             candidato.NombreCandidato = data.NombreCandidato;
@@ -74,7 +77,6 @@ namespace Data.Repository.APICandidatosRepository
             candidato.InformacionDeContacto = data.InformacionDeContacto;
             candidato.IdPartido = data.IdPartido;
             candidato.IdCargo = data.IdCargo;
-            candidato.IdTranspariencia = data.IdTranspariencia;
             candidato.DateRegister = DateTime.Now;
             candidato.UserRegister = _username;
             candidato.IpRegister = _ip;
@@ -120,7 +122,6 @@ namespace Data.Repository.APICandidatosRepository
                 model.InformacionDeContacto = data.InformacionDeContacto;
                 model.IdPartido = data.IdPartido;
                 model.IdCargo = data.IdCargo;
-                model.IdTranspariencia = data.IdTranspariencia;
 
                 await _context.SaveChangesAsync();
 
@@ -143,7 +144,6 @@ namespace Data.Repository.APICandidatosRepository
                 InformacionDeContacto = c.InformacionDeContacto,
                 IdPartido = c.IdPartido,
                 IdCargo = c.IdCargo,
-                IdTranspariencia = c.IdTranspariencia,
             }).FirstOrDefaultAsync();
 
             return candidatoSelected;
@@ -161,9 +161,6 @@ namespace Data.Repository.APICandidatosRepository
                 InformacionDeContacto = c.InformacionDeContacto,
                 NombrePartido = c.Partido.NombrePartido,
                 Cargo = c.Cargo.Nombre,
-                DeclaracionDeBienes = c.Transpariencia.DeclaracionesDeBienes,
-                InvolucradoEnEscandalos = c.Transpariencia.InvolucradoEnEscandalos,
-                EvaluacionesDeEtica = c.Transpariencia.EvaluacionesDeEtica,
             }).ToListAsync();
 
             return candidatos;

@@ -57,7 +57,7 @@ namespace Data.Repository.APICandidatosRepository
 
         public async Task<MessageInfoDTO> Create(PocisionDTO data)
         {
-            var isAlreadyExist = await _context.Pocision.Where(x => x.Active && x.Tema.ToUpper().Equals(data.Tema.ToUpper())).AnyAsync();
+            var isAlreadyExist = await _context.Posiciones.Where(x => x.Active && x.Tema.ToUpper().Equals(data.Tema.ToUpper())).AnyAsync();
 
             if (isAlreadyExist)
             {
@@ -65,7 +65,7 @@ namespace Data.Repository.APICandidatosRepository
                 return infoDTO;
             }
 
-            Pocision pocision = new Pocision();
+            Posición pocision = new Posición();
             pocision.Active = true;
             pocision.Tema = data.Tema;
             pocision.Postura = data.Postura;
@@ -74,7 +74,7 @@ namespace Data.Repository.APICandidatosRepository
             pocision.UserRegister = _username;
             pocision.IpRegister = _ip;
 
-            await _context.Pocision.AddAsync(pocision);
+            await _context.Posiciones.AddAsync(pocision);
             await _unit.SaveChangesAsync();
 
             infoDTO.AccionCompletada("Se ha creado la pocision");
@@ -83,7 +83,7 @@ namespace Data.Repository.APICandidatosRepository
 
         public async  Task<MessageInfoDTO> Desactive(long id)
         {
-            var pocisionToDelete = await _context.Pocision.Where(x => x.Active && x.IdPocision == id).FirstOrDefaultAsync();
+            var pocisionToDelete = await _context.Posiciones.Where(x => x.Active && x.IdPocision == id).FirstOrDefaultAsync();
             if (pocisionToDelete != null)
             {
                 infoDTO.AccionFallida("La pocision seleccionado no se encuentra disponible", 400);
@@ -94,7 +94,6 @@ namespace Data.Repository.APICandidatosRepository
             pocisionToDelete.IpDelete = _ip;
 
             await _unit.SaveChangesAsync();
-
             infoDTO.AccionCompletada("La pocision seleccionada a sido eliminado correctamente");
 
             return infoDTO;
@@ -104,7 +103,7 @@ namespace Data.Repository.APICandidatosRepository
         {
             try
             {
-                var model = await _context.Pocision.Where(x => x.Active && x.IdPocision == data.IdPocision).FirstOrDefaultAsync() ?? throw new Exception("No se encontro la pocision");
+                var model = await _context.Posiciones.Where(x => x.Active && x.IdPocision == data.IdPocision).FirstOrDefaultAsync() ?? throw new Exception("No se encontro la pocision");
 
                 model.Tema = data.Tema;
                 model.Postura = data.Postura;
@@ -126,7 +125,7 @@ namespace Data.Repository.APICandidatosRepository
 
         public async Task<PocisionDTO> Get(long id)
         {
-            var positionSelected = await _context.Pocision.Where(x => x.Active && x.IdPocision == id).Select(c => new PocisionDTO
+            var positionSelected = await _context.Posiciones.Where(x => x.Active && x.IdPocision == id).Select(c => new PocisionDTO
             {
                 Tema = c.Tema,
                 Postura = c.Postura,
@@ -138,7 +137,7 @@ namespace Data.Repository.APICandidatosRepository
 
         public async  Task<List<PocisionDTO>> GetAll()
         {
-            var pocision = await _context.Pocision.Where(x => x.Active).Select(c => new PocisionDTO
+            var pocision = await _context.Posiciones.Where(x => x.Active).Select(c => new PocisionDTO
             {
                 IdPocision = c.IdPocision,
                 Postura = c.Postura,

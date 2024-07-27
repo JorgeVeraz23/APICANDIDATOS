@@ -17,7 +17,7 @@ namespace Data.Dto.PropuestaDTO
         [Required]
         public string Descripción { get; set; } = "";
         public string Area { get; set; } = "";
-        public long IdCandidato { get; set; }
+        public long? IdCandidato { get; set; }
     }
 
     public class MostrarPropuestaDTO

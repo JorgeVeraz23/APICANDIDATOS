@@ -94,6 +94,29 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Cargos",
+                columns: table => new
+                {
+                    IdCargo = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Active = table.Column<bool>(type: "bit", nullable: false),
+                    UserRegister = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DateRegister = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IpRegister = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    UserModification = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    DateModification = table.Column<DateTime>(type: "datetime2", maxLength: 100, nullable: true),
+                    IpModification = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    UserDelete = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    DateDelete = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IpDelete = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cargos", x => x.IdCargo);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "EmailTemplates",
                 columns: table => new
                 {
@@ -215,6 +238,29 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Partidos",
+                columns: table => new
+                {
+                    IdPartido = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NombrePartido = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Active = table.Column<bool>(type: "bit", nullable: false),
+                    UserRegister = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DateRegister = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IpRegister = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    UserModification = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    DateModification = table.Column<DateTime>(type: "datetime2", maxLength: 100, nullable: true),
+                    IpModification = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    UserDelete = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    DateDelete = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IpDelete = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Partidos", x => x.IdPartido);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Role",
                 schema: "SEG",
                 columns: table => new
@@ -237,6 +283,31 @@ namespace Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Role", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Transparencias",
+                columns: table => new
+                {
+                    IdTranspariencia = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DeclaracionesDeBienes = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InvolucradoEnEscandalos = table.Column<bool>(type: "bit", nullable: false),
+                    EvaluacionesDeEtica = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Active = table.Column<bool>(type: "bit", nullable: false),
+                    UserRegister = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DateRegister = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IpRegister = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    UserModification = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    DateModification = table.Column<DateTime>(type: "datetime2", maxLength: 100, nullable: true),
+                    IpModification = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    UserDelete = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    DateDelete = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IpDelete = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Transparencias", x => x.IdTranspariencia);
                 });
 
             migrationBuilder.CreateTable(
@@ -313,6 +384,45 @@ namespace Data.Migrations
                         column: x => x.TypeParameterIdTypeParameter,
                         principalTable: "ParameterTypes",
                         principalColumn: "IdTypeParameter");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Candidatos",
+                columns: table => new
+                {
+                    IdCandidato = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NombreCandidato = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Edad = table.Column<int>(type: "int", nullable: false),
+                    FotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LugarDeNacimiento = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InformacionDeContacto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdPartido = table.Column<long>(type: "bigint", nullable: true),
+                    IdCargo = table.Column<long>(type: "bigint", nullable: true),
+                    Active = table.Column<bool>(type: "bit", nullable: false),
+                    UserRegister = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DateRegister = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IpRegister = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    UserModification = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    DateModification = table.Column<DateTime>(type: "datetime2", maxLength: 100, nullable: true),
+                    IpModification = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    UserDelete = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    DateDelete = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IpDelete = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Candidatos", x => x.IdCandidato);
+                    table.ForeignKey(
+                        name: "FK_Candidatos_Cargos_IdCargo",
+                        column: x => x.IdCargo,
+                        principalTable: "Cargos",
+                        principalColumn: "IdCargo");
+                    table.ForeignKey(
+                        name: "FK_Candidatos_Partidos_IdPartido",
+                        column: x => x.IdPartido,
+                        principalTable: "Partidos",
+                        principalColumn: "IdPartido");
                 });
 
             migrationBuilder.CreateTable(
@@ -512,6 +622,188 @@ namespace Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Apoyos",
+                columns: table => new
+                {
+                    IdApoyo = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NombreDelPartidario = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdCandidato = table.Column<long>(type: "bigint", nullable: true),
+                    Active = table.Column<bool>(type: "bit", nullable: false),
+                    UserRegister = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DateRegister = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IpRegister = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    UserModification = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    DateModification = table.Column<DateTime>(type: "datetime2", maxLength: 100, nullable: true),
+                    IpModification = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    UserDelete = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    DateDelete = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IpDelete = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Apoyos", x => x.IdApoyo);
+                    table.ForeignKey(
+                        name: "FK_Apoyos_Candidatos_IdCandidato",
+                        column: x => x.IdCandidato,
+                        principalTable: "Candidatos",
+                        principalColumn: "IdCandidato");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Eventos",
+                columns: table => new
+                {
+                    IdEvento = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Titulo = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Ubicacion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdCandidato = table.Column<long>(type: "bigint", nullable: true),
+                    Active = table.Column<bool>(type: "bit", nullable: false),
+                    UserRegister = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DateRegister = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IpRegister = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    UserModification = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    DateModification = table.Column<DateTime>(type: "datetime2", maxLength: 100, nullable: true),
+                    IpModification = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    UserDelete = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    DateDelete = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IpDelete = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Eventos", x => x.IdEvento);
+                    table.ForeignKey(
+                        name: "FK_Eventos_Candidatos_IdCandidato",
+                        column: x => x.IdCandidato,
+                        principalTable: "Candidatos",
+                        principalColumn: "IdCandidato");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Posiciones",
+                columns: table => new
+                {
+                    IdPocision = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Tema = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Postura = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    IdCandidato = table.Column<long>(type: "bigint", nullable: true),
+                    Active = table.Column<bool>(type: "bit", nullable: false),
+                    UserRegister = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DateRegister = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IpRegister = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    UserModification = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    DateModification = table.Column<DateTime>(type: "datetime2", maxLength: 100, nullable: true),
+                    IpModification = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    UserDelete = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    DateDelete = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IpDelete = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Posiciones", x => x.IdPocision);
+                    table.ForeignKey(
+                        name: "FK_Posiciones_Candidatos_IdCandidato",
+                        column: x => x.IdCandidato,
+                        principalTable: "Candidatos",
+                        principalColumn: "IdCandidato");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Propuestas",
+                columns: table => new
+                {
+                    IdPropuesta = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Titulo = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Descripción = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Area = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdCandidato = table.Column<long>(type: "bigint", nullable: true),
+                    Active = table.Column<bool>(type: "bit", nullable: false),
+                    UserRegister = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DateRegister = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IpRegister = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    UserModification = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    DateModification = table.Column<DateTime>(type: "datetime2", maxLength: 100, nullable: true),
+                    IpModification = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    UserDelete = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    DateDelete = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IpDelete = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Propuestas", x => x.IdPropuesta);
+                    table.ForeignKey(
+                        name: "FK_Propuestas_Candidatos_IdCandidato",
+                        column: x => x.IdCandidato,
+                        principalTable: "Candidatos",
+                        principalColumn: "IdCandidato");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RedSocials",
+                columns: table => new
+                {
+                    IdRedsocial = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Plataforma = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdCandidato = table.Column<long>(type: "bigint", nullable: true),
+                    Active = table.Column<bool>(type: "bit", nullable: false),
+                    UserRegister = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DateRegister = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IpRegister = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    UserModification = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    DateModification = table.Column<DateTime>(type: "datetime2", maxLength: 100, nullable: true),
+                    IpModification = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    UserDelete = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    DateDelete = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IpDelete = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RedSocials", x => x.IdRedsocial);
+                    table.ForeignKey(
+                        name: "FK_RedSocials_Candidatos_IdCandidato",
+                        column: x => x.IdCandidato,
+                        principalTable: "Candidatos",
+                        principalColumn: "IdCandidato");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Trayectorias",
+                columns: table => new
+                {
+                    IdTrayectoria = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Titulo = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Descripcion = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    IdCandidato = table.Column<long>(type: "bigint", nullable: true),
+                    Active = table.Column<bool>(type: "bit", nullable: false),
+                    UserRegister = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DateRegister = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IpRegister = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    UserModification = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    DateModification = table.Column<DateTime>(type: "datetime2", maxLength: 100, nullable: true),
+                    IpModification = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    UserDelete = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    DateDelete = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IpDelete = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Trayectorias", x => x.IdTrayectoria);
+                    table.ForeignKey(
+                        name: "FK_Trayectorias_Candidatos_IdCandidato",
+                        column: x => x.IdCandidato,
+                        principalTable: "Candidatos",
+                        principalColumn: "IdCandidato");
+                });
+
             migrationBuilder.InsertData(
                 table: "EmailTemplates",
                 columns: new[] { "IdEmailTemplate", "Active", "Body", "DateDelete", "DateModification", "DateRegister", "Enumerator", "IpDelete", "IpModification", "IpRegister", "Params", "Subject", "UserDelete", "UserModification", "UserRegister" },
@@ -601,6 +893,26 @@ namespace Data.Migrations
                 values: new object[] { 3L, true, null, null, new DateTime(2024, 1, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 7L, "2c5e174e-3b0e-446f-86af-483d56fd7210", null, null, "0.0.0.0", false, true, true, false, true, false, false, false, true, null, null, null, "CreacionInicial" });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Apoyos_IdCandidato",
+                table: "Apoyos",
+                column: "IdCandidato");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Candidatos_IdCargo",
+                table: "Candidatos",
+                column: "IdCargo");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Candidatos_IdPartido",
+                table: "Candidatos",
+                column: "IdPartido");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Eventos_IdCandidato",
+                table: "Eventos",
+                column: "IdCandidato");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MenuRoles_IdMenu",
                 table: "MenuRoles",
                 column: "IdMenu");
@@ -626,6 +938,21 @@ namespace Data.Migrations
                 column: "TypeParameterIdTypeParameter");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Posiciones_IdCandidato",
+                table: "Posiciones",
+                column: "IdCandidato");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Propuestas_IdCandidato",
+                table: "Propuestas",
+                column: "IdCandidato");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RedSocials_IdCandidato",
+                table: "RedSocials",
+                column: "IdCandidato");
+
+            migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 schema: "SEG",
                 table: "Role",
@@ -638,6 +965,11 @@ namespace Data.Migrations
                 schema: "SEG",
                 table: "RoleClaim",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Trayectorias_IdCandidato",
+                table: "Trayectorias",
+                column: "IdCandidato");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserClaim_UserId",
@@ -676,6 +1008,9 @@ namespace Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Apoyos");
+
+            migrationBuilder.DropTable(
                 name: "ApplicationVersions");
 
             migrationBuilder.DropTable(
@@ -686,6 +1021,9 @@ namespace Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "EmailTemplates");
+
+            migrationBuilder.DropTable(
+                name: "Eventos");
 
             migrationBuilder.DropTable(
                 name: "Logs");
@@ -700,8 +1038,23 @@ namespace Data.Migrations
                 name: "Parameters");
 
             migrationBuilder.DropTable(
+                name: "Posiciones");
+
+            migrationBuilder.DropTable(
+                name: "Propuestas");
+
+            migrationBuilder.DropTable(
+                name: "RedSocials");
+
+            migrationBuilder.DropTable(
                 name: "RoleClaim",
                 schema: "SEG");
+
+            migrationBuilder.DropTable(
+                name: "Transparencias");
+
+            migrationBuilder.DropTable(
+                name: "Trayectorias");
 
             migrationBuilder.DropTable(
                 name: "UserClaim",
@@ -726,12 +1079,21 @@ namespace Data.Migrations
                 name: "ParameterTypes");
 
             migrationBuilder.DropTable(
+                name: "Candidatos");
+
+            migrationBuilder.DropTable(
                 name: "Role",
                 schema: "SEG");
 
             migrationBuilder.DropTable(
                 name: "Users",
                 schema: "SEG");
+
+            migrationBuilder.DropTable(
+                name: "Cargos");
+
+            migrationBuilder.DropTable(
+                name: "Partidos");
         }
     }
 }

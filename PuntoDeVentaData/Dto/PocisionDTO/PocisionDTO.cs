@@ -15,7 +15,7 @@ namespace Data.Dto.PocisionDTO
         public string Tema { get; set; } = "";
 
         public string Postura { get; set; } = "";
-        public long IdCandidato { get; set; }
+        public long? IdCandidato { get; set; }
     }
 
     public class MostrarPocisionDTO

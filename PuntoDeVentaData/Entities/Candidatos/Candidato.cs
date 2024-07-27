@@ -1,6 +1,6 @@
 ﻿using Data.Entities.Apoyo;
 using Data.Entities.Evento;
-using Data.Entities.Experiencia;
+using Data.Entities.Trayectoria;
 using Data.Entities.PartidosPoliticos;
 using Data.Entities.Pocision;
 using Data.Entities.Propuestas;
@@ -33,18 +33,18 @@ namespace Data.Entities.Candidatos
         public string LugarDeNacimiento { get; set; } = "";
         public string InformacionDeContacto { get; set; } = "";
         [ForeignKey("Partido")]
-        public long IdPartido { get; set; }
+        public long? IdPartido { get; set; }
         [ForeignKey("Cargo")]
-        public long IdCargo { get; set; }
-        [ForeignKey("Transpariencia")]
-        public long IdTranspariencia { get; set; }
+        public long? IdCargo { get; set; }
         public virtual Cargo.Cargo? Cargo { get; set; }
         public virtual Partido? Partido { get; set; }
-        public virtual Transpariencia.Transpariencia? Transpariencia { get; set; }
+
         public virtual ICollection<Propuesta>? Propuestas { get; set; }
-        public virtual ICollection<Experiencia.Trayectoria>? Experiencias { get; set; }
-        public virtual ICollection<Pocision.Pocision>? Pocisiones { get; set; }
-        public virtual ICollection<RedSocial.RedSocial>? RedesSociales { get; set; }
+        public virtual ICollection<Trayectoria.Trayectoria>? Trayectorias { get; set; }
+        public virtual ICollection<Posición>? Posicións { get; set; }
+
+  
+    
         public virtual ICollection<Apoyo.Apoyo>? Apoyos { get; set; }
         public virtual ICollection<Evento.Evento>? Eventos { get; set; }
 

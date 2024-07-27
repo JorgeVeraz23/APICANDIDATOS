@@ -17,7 +17,7 @@ namespace Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.4")
+                .HasAnnotation("ProductVersion", "8.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -47,7 +47,7 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("IdCandidato")
+                    b.Property<long?>("IdCandidato")
                         .HasColumnType("bigint");
 
                     b.Property<string>("IpDelete")
@@ -115,13 +115,10 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("IdCargo")
+                    b.Property<long?>("IdCargo")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("IdPartido")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("IdTranspariencia")
+                    b.Property<long?>("IdPartido")
                         .HasColumnType("bigint");
 
                     b.Property<string>("InformacionDeContacto")
@@ -167,9 +164,6 @@ namespace Data.Migrations
                     b.HasIndex("IdCargo");
 
                     b.HasIndex("IdPartido");
-
-                    b.HasIndex("IdTranspariencia")
-                        .IsUnique();
 
                     b.ToTable("Candidatos");
                 });
@@ -315,7 +309,7 @@ namespace Data.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("IdCandidato")
+                    b.Property<long?>("IdCandidato")
                         .HasColumnType("bigint");
 
                     b.Property<string>("IpDelete")
@@ -357,72 +351,6 @@ namespace Data.Migrations
                     b.HasIndex("IdCandidato");
 
                     b.ToTable("Eventos");
-                });
-
-            modelBuilder.Entity("Data.Entities.Experiencia.Trayectoria", b =>
-                {
-                    b.Property<long>("IdTrayectoria")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IdTrayectoria"));
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("DateDelete")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateModification")
-                        .HasMaxLength(100)
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateRegister")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<long>("IdCandidato")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("IpDelete")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("IpModification")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("IpRegister")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Titulo")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("UserDelete")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("UserModification")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("UserRegister")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("IdTrayectoria");
-
-                    b.HasIndex("IdCandidato");
-
-                    b.ToTable("Trayectorias");
                 });
 
             modelBuilder.Entity("Data.Entities.PartidosPoliticos.Partido", b =>
@@ -481,7 +409,7 @@ namespace Data.Migrations
                     b.ToTable("Partidos");
                 });
 
-            modelBuilder.Entity("Data.Entities.Pocision.Pocision", b =>
+            modelBuilder.Entity("Data.Entities.Pocision.Posición", b =>
                 {
                     b.Property<long>("IdPocision")
                         .ValueGeneratedOnAdd()
@@ -502,7 +430,7 @@ namespace Data.Migrations
                     b.Property<DateTime>("DateRegister")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("IdCandidato")
+                    b.Property<long?>("IdCandidato")
                         .HasColumnType("bigint");
 
                     b.Property<string>("IpDelete")
@@ -544,7 +472,7 @@ namespace Data.Migrations
 
                     b.HasIndex("IdCandidato");
 
-                    b.ToTable("Pocision");
+                    b.ToTable("Posiciones");
                 });
 
             modelBuilder.Entity("Data.Entities.Propuestas.Propuesta", b =>
@@ -576,7 +504,7 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("IdCandidato")
+                    b.Property<long?>("IdCandidato")
                         .HasColumnType("bigint");
 
                     b.Property<string>("IpDelete")
@@ -618,11 +546,11 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Data.Entities.RedSocial.RedSocial", b =>
                 {
-                    b.Property<long>("IdResocial")
+                    b.Property<long>("IdRedsocial")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IdResocial"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IdRedsocial"));
 
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
@@ -637,7 +565,7 @@ namespace Data.Migrations
                     b.Property<DateTime>("DateRegister")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("IdCandidato")
+                    b.Property<long?>("IdCandidato")
                         .HasColumnType("bigint");
 
                     b.Property<string>("IpDelete")
@@ -674,14 +602,14 @@ namespace Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("IdResocial");
+                    b.HasKey("IdRedsocial");
 
                     b.HasIndex("IdCandidato");
 
                     b.ToTable("RedSocials");
                 });
 
-            modelBuilder.Entity("Data.Entities.Transpariencia.Transpariencia", b =>
+            modelBuilder.Entity("Data.Entities.Transpariencia.Transparencia", b =>
                 {
                     b.Property<long>("IdTranspariencia")
                         .ValueGeneratedOnAdd()
@@ -740,7 +668,73 @@ namespace Data.Migrations
 
                     b.HasKey("IdTranspariencia");
 
-                    b.ToTable("Transpariencias");
+                    b.ToTable("Transparencias");
+                });
+
+            modelBuilder.Entity("Data.Entities.Trayectoria.Trayectoria", b =>
+                {
+                    b.Property<long>("IdTrayectoria")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IdTrayectoria"));
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("DateDelete")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateModification")
+                        .HasMaxLength(100)
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateRegister")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<long?>("IdCandidato")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("IpDelete")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("IpModification")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("IpRegister")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("UserDelete")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("UserModification")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("UserRegister")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("IdTrayectoria");
+
+                    b.HasIndex("IdCandidato");
+
+                    b.ToTable("Trayectorias");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -2149,9 +2143,7 @@ namespace Data.Migrations
                 {
                     b.HasOne("Data.Entities.Candidatos.Candidato", "Candidato")
                         .WithMany("Apoyos")
-                        .HasForeignKey("IdCandidato")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdCandidato");
 
                     b.Navigation("Candidato");
                 });
@@ -2160,58 +2152,31 @@ namespace Data.Migrations
                 {
                     b.HasOne("Data.Entities.Cargo.Cargo", "Cargo")
                         .WithMany("Candidato")
-                        .HasForeignKey("IdCargo")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdCargo");
 
                     b.HasOne("Data.Entities.PartidosPoliticos.Partido", "Partido")
                         .WithMany("Candidatos")
-                        .HasForeignKey("IdPartido")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Entities.Transpariencia.Transpariencia", "Transpariencia")
-                        .WithOne("Candidato")
-                        .HasForeignKey("Data.Entities.Candidatos.Candidato", "IdTranspariencia")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdPartido");
 
                     b.Navigation("Cargo");
 
                     b.Navigation("Partido");
-
-                    b.Navigation("Transpariencia");
                 });
 
             modelBuilder.Entity("Data.Entities.Evento.Evento", b =>
                 {
                     b.HasOne("Data.Entities.Candidatos.Candidato", "Candidato")
                         .WithMany("Eventos")
-                        .HasForeignKey("IdCandidato")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdCandidato");
 
                     b.Navigation("Candidato");
                 });
 
-            modelBuilder.Entity("Data.Entities.Experiencia.Trayectoria", b =>
+            modelBuilder.Entity("Data.Entities.Pocision.Posición", b =>
                 {
                     b.HasOne("Data.Entities.Candidatos.Candidato", "Candidato")
-                        .WithMany("Experiencias")
-                        .HasForeignKey("IdCandidato")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Candidato");
-                });
-
-            modelBuilder.Entity("Data.Entities.Pocision.Pocision", b =>
-                {
-                    b.HasOne("Data.Entities.Candidatos.Candidato", "Candidato")
-                        .WithMany("Pocisiones")
-                        .HasForeignKey("IdCandidato")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Posicións")
+                        .HasForeignKey("IdCandidato");
 
                     b.Navigation("Candidato");
                 });
@@ -2220,9 +2185,7 @@ namespace Data.Migrations
                 {
                     b.HasOne("Data.Entities.Candidatos.Candidato", "Candidato")
                         .WithMany("Propuestas")
-                        .HasForeignKey("IdCandidato")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdCandidato");
 
                     b.Navigation("Candidato");
                 });
@@ -2230,10 +2193,17 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Entities.RedSocial.RedSocial", b =>
                 {
                     b.HasOne("Data.Entities.Candidatos.Candidato", "Candidato")
-                        .WithMany("RedesSociales")
-                        .HasForeignKey("IdCandidato")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("IdCandidato");
+
+                    b.Navigation("Candidato");
+                });
+
+            modelBuilder.Entity("Data.Entities.Trayectoria.Trayectoria", b =>
+                {
+                    b.HasOne("Data.Entities.Candidatos.Candidato", "Candidato")
+                        .WithMany("Trayectorias")
+                        .HasForeignKey("IdCandidato");
 
                     b.Navigation("Candidato");
                 });
@@ -2337,13 +2307,11 @@ namespace Data.Migrations
 
                     b.Navigation("Eventos");
 
-                    b.Navigation("Experiencias");
-
-                    b.Navigation("Pocisiones");
+                    b.Navigation("Posicións");
 
                     b.Navigation("Propuestas");
 
-                    b.Navigation("RedesSociales");
+                    b.Navigation("Trayectorias");
                 });
 
             modelBuilder.Entity("Data.Entities.Cargo.Cargo", b =>
@@ -2354,11 +2322,6 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Entities.PartidosPoliticos.Partido", b =>
                 {
                     b.Navigation("Candidatos");
-                });
-
-            modelBuilder.Entity("Data.Entities.Transpariencia.Transpariencia", b =>
-                {
-                    b.Navigation("Candidato");
                 });
 
             modelBuilder.Entity("PuntoDeVentaData.Entities.Parameters.ParameterType", b =>

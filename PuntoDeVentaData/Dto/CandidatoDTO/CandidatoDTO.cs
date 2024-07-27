@@ -16,9 +16,9 @@ namespace Data.Dto.CandidatoDTO
         public string FotoUrl { get; set; } = "";
         public string LugarDeNacimiento { get; set; } = "";
         public string InformacionDeContacto { get; set; } = "";
-        public long IdPartido { get; set; }
-        public long IdCargo { get; set; }
-        public long IdTranspariencia { get; set; }
+        public long? IdPartido { get; set; }
+        public long? IdCargo { get; set; }
+        public long? IdTranspariencia { get; set; }
 
     }
 
@@ -36,5 +36,19 @@ namespace Data.Dto.CandidatoDTO
         public bool InvolucradoEnEscandalos { get; set; }
         public string EvaluacionesDeEtica { get; set; } = "";
 
+    }
+
+    public class CrearCandidatoDTO
+    {
+        public string NombreCandidato { get; set; }
+        public int Edad { get; set; }
+        public string FotoUrl { get; set; }
+        public string LugarDeNacimiento { get; set; }
+        public string InformacionDeContacto { get; set; }
+        public long IdPartido { get; set; }
+        public long IdCargo { get; set; }
+        public string NombreTransparencia { get; set; }
+        public string DescripcionTransparencia { get; set; }
+        public bool InvolucradoEnEscandalos { get; set; }
     }
 }

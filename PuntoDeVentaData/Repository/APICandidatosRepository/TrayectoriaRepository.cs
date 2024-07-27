@@ -1,7 +1,8 @@
 ﻿using Data.Dto.ExperienciaDTO;
 using Data.Dto.PartidoPoliticoDTO;
-using Data.Entities.Experiencia;
+using Data.Entities.Transpariencia;
 using Data.Entities.PartidosPoliticos;
+using Data.Entities.Trayectoria;
 using Data.Interfaces.ApiCandidatosInterfaces;
 using Data.Interfaces.SecurityInterfaces;
 using Microsoft.AspNetCore.Http;

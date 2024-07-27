@@ -21,7 +21,7 @@ namespace Data.Entities.Propuestas
         public string Descripción { get; set; } = "";
         public string Area { get; set; } = "";
         [ForeignKey("Candidato")]
-        public long IdCandidato { get; set; }
+        public long? IdCandidato { get; set; }
         public virtual Candidato? Candidato { get; set; }
 
 

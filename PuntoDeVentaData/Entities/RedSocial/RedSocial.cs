@@ -13,14 +13,14 @@ namespace Data.Entities.RedSocial
     public class RedSocial : CrudEntities
     {
         [Key]
-        public long IdResocial { get; set; }
+        public long IdRedsocial { get; set; }
         [Required]
         [MaxLength(250)]
         public string Plataforma { get; set; } = "";
         [Required]
         public string Url { get; set; }
         [ForeignKey("Candidato")]
-        public long IdCandidato { get; set; }
+        public long? IdCandidato { get; set; }
         public virtual Candidato? Candidato { get; set; }
     }
 }

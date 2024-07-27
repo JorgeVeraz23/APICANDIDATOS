@@ -21,7 +21,7 @@ namespace Data.Entities.Evento
         public DateTime Fecha { get; set; }
         public string Ubicacion { get; set; } = "";
         [ForeignKey("Candidato")]
-        public long IdCandidato { get; set; }
+        public long? IdCandidato { get; set; }
         public virtual Candidato? Candidato { get; set; }
 
 

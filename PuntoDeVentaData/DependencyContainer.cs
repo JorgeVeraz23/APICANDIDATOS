@@ -44,16 +44,16 @@ namespace Data
             services.AddScoped<GeneralCatalogsInterface, GeneralCatalogsRepository>();
 
             #region API CANDIDATOS
-            services.AddScoped<CandidatoInterface, CandidatoRepository>().Reverse();
-            services.AddScoped<PartidoInterface, PartidoRepository>().Reverse();
-            services.AddScoped<TrayectoriaInterface, TrayectoriaRepository>().Reverse();
-            services.AddScoped<TransparienciaInterface, TransparienciaRepository>().Reverse();
-            services.AddScoped<PropuestaInterface, PropuestaRepository>().Reverse();
-            services.AddScoped<EventoInterface, EventoRepository>().Reverse();
-            services.AddScoped<RedSocialInterface, RedSocialRepository>().Reverse();
-            services.AddScoped<CargoInterface, CargoRepository>().Reverse();
-            services.AddScoped<ApoyoInterface, ApoyoRepository>().Reverse();
-            services.AddScoped<PocisionInterface, PocisionRepository>().Reverse();
+            services.AddScoped<CandidatoInterface, CandidatoRepository>();
+            services.AddScoped<PartidoInterface, PartidoRepository>();
+            services.AddScoped<TrayectoriaInterface, TrayectoriaRepository>();
+            services.AddScoped<TransparienciaInterface, TransparienciaRepository>();
+            services.AddScoped<PropuestaInterface, PropuestaRepository>();
+            services.AddScoped<EventoInterface, EventoRepository>();
+            services.AddScoped<RedSocialInterface, RedSocialRepository>();
+            services.AddScoped<CargoInterface, CargoRepository>();
+            services.AddScoped<ApoyoInterface, ApoyoRepository>();
+            services.AddScoped<PocisionInterface, PocisionRepository>();
             #endregion
 
             return services.AddDbContext<ApplicationDbContext>(options =>

@@ -3,12 +3,12 @@ using Data.Entities.Candidatos;
 using Data.Entities.Cargo;
 using Data.Entities.Configurations;
 using Data.Entities.Evento;
-using Data.Entities.Experiencia;
 using Data.Entities.PartidosPoliticos;
 using Data.Entities.Pocision;
 using Data.Entities.Propuestas;
 using Data.Entities.RedSocial;
 using Data.Entities.Transpariencia;
+using Data.Entities.Trayectoria;
 using LinkQuality.Data.Repository.UtilitiesRepository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -46,8 +46,8 @@ namespace Data
         public virtual DbSet<Partido> Partidos { get; set; }
         public virtual DbSet<Trayectoria> Trayectorias { get; set; }
         public virtual DbSet<Propuesta> Propuestas { get; set; }
-        public virtual DbSet<Pocision> Pocision { get; set; }
-        public virtual DbSet<Transpariencia> Transpariencias { get; set; }
+        public virtual DbSet<Posición> Posiciones { get; set; }
+        public virtual DbSet<Transparencia> Transparencias { get; set; }
         public virtual DbSet<RedSocial> RedSocials { get; set; }
         public virtual DbSet<Apoyo> Apoyos { get; set; }
         public virtual DbSet<Evento> Eventos { get; set; }

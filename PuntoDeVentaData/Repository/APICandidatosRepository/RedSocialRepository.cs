@@ -83,7 +83,7 @@ namespace Data.Repository.APICandidatosRepository
 
         public async Task<MessageInfoDTO> Desactive(long id)
         {
-            var redSocialToDelete = await _context.RedSocials.Where(x => x.Active && x.IdResocial == id).FirstOrDefaultAsync();
+            var redSocialToDelete = await _context.RedSocials.Where(x => x.Active && x.IdRedsocial == id).FirstOrDefaultAsync();
             if (redSocialToDelete != null)
             {
                 infoDTO.AccionFallida("La red social seleccionado no se encuentra disponible", 400);
@@ -104,7 +104,7 @@ namespace Data.Repository.APICandidatosRepository
         {
             try
             {
-                var model = await _context.RedSocials.Where(x => x.Active && x.IdResocial == data.IdResocial).FirstOrDefaultAsync() ?? throw new Exception("No se encontro la red social");
+                var model = await _context.RedSocials.Where(x => x.Active && x.IdRedsocial == data.IdResocial).FirstOrDefaultAsync() ?? throw new Exception("No se encontro la red social");
 
                 model.Plataforma = data.Plataforma;
                 model.Url = data.Url;
@@ -126,9 +126,9 @@ namespace Data.Repository.APICandidatosRepository
 
         public async Task<RedSocialDTO> Get(long id)
         {
-            var redSocialSelected = await _context.RedSocials.Where(x => x.Active && x.IdResocial == id).Select(c => new RedSocialDTO
+            var redSocialSelected = await _context.RedSocials.Where(x => x.Active && x.IdRedsocial == id).Select(c => new RedSocialDTO
             {
-                IdResocial = c.IdResocial,
+                IdResocial = c.IdRedsocial,
                 Plataforma = c.Plataforma,
                 Url = c.Url,
                 IdCandidato = c.IdCandidato,
@@ -141,7 +141,7 @@ namespace Data.Repository.APICandidatosRepository
         {
             var redSocial = await _context.RedSocials.Where(x => x.Active).Select(c => new MostrarRedSocialDTO
             {
-                IdResocial = c.IdResocial,
+                IdResocial = c.IdRedsocial,
                 Plataforma = c.Plataforma,
                 Url = c.Url,
                 NombreCandidato = c.Candidato.NombreCandidato

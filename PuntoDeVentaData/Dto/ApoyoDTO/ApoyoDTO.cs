@@ -13,7 +13,7 @@ namespace Data.Dto.ApoyoDTO
         public long IdApoyo { get; set; }
         public string NombreDelPartidario { get; set; } = "";
         public string Descripcion { get; set; } = "";
-        public long IdCandidato { get; set; }
+        public long? IdCandidato { get; set; }
     }
 
     public class MostrarApoyoDTO

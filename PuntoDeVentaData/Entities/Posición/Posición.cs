@@ -1,23 +1,26 @@
 ﻿using Data.Entities.Candidatos;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using PuntoDeVentaData.Entities.Utilities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data.Entities.Apoyo
+namespace Data.Entities.Pocision
 {
-    public class Apoyo : CrudEntities
+    public class Posición : CrudEntities
     {
         [Key]
-        public long IdApoyo { get; set; }
+        public long IdPocision { get; set; }
         [Required]
         [MaxLength(250)]
-        public string NombreDelPartidario { get; set; } = "";
-        public string Descripcion { get; set; } = "";
+        public string Tema { get; set; } = "";
+        [Required]
+        [MaxLength(500)]
+        public string Postura { get; set; } = "";
         [ForeignKey("Candidato")]
         public long? IdCandidato { get; set; }
         public virtual Candidato? Candidato { get; set; }

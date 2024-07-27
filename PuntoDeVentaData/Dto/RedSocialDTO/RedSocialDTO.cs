@@ -15,7 +15,7 @@ namespace Data.Dto.RedSocialDTO
         public string Plataforma { get; set; } = "";
         [Required]
         public string Url { get; set; }
-        public long IdCandidato { get; set; }
+        public long? IdCandidato { get; set; }
     }
 
     public class MostrarRedSocialDTO

@@ -59,7 +59,7 @@ namespace Data.Repository.APICandidatosRepository
         public async Task<MessageInfoDTO> Create(TransparienciaDTO data)
         {
 
-            Transpariencia transpariencia = new Transpariencia();
+            Transparencia transpariencia = new Transparencia();
             transpariencia.Active = true;
             transpariencia.DeclaracionesDeBienes = data.DeclaracionesDeBienes;
             transpariencia.InvolucradoEnEscandalos = data.InvolucradoEnEscandalos;
@@ -68,7 +68,7 @@ namespace Data.Repository.APICandidatosRepository
             transpariencia.UserRegister = _username;
             transpariencia.IpRegister = _ip;
 
-            await _context.Transpariencias.AddAsync(transpariencia);
+            await _context.Transparencias.AddAsync(transpariencia);
             await _unit.SaveChangesAsync();
 
             infoDTO.AccionCompletada("Se ha creado la transparencia");
@@ -77,7 +77,7 @@ namespace Data.Repository.APICandidatosRepository
 
         public async Task<MessageInfoDTO> Desactive(long id)
         {
-            var transparenciaToDelete = await _context.Transpariencias.Where(x => x.Active && x.IdTranspariencia == id).FirstOrDefaultAsync();
+            var transparenciaToDelete = await _context.Transparencias.Where(x => x.Active && x.IdTranspariencia == id).FirstOrDefaultAsync();
             if (transparenciaToDelete != null)
             {
                 infoDTO.AccionFallida("La transparencia seleccionado no se encuentra disponible", 400);
@@ -98,7 +98,7 @@ namespace Data.Repository.APICandidatosRepository
         {
             try
             {
-                var model = await _context.Transpariencias.Where(x => x.Active && x.IdTranspariencia == data.IdTranspariencia).FirstOrDefaultAsync() ?? throw new Exception("No se encontro la transparecia");
+                var model = await _context.Transparencias.Where(x => x.Active && x.IdTranspariencia == data.IdTranspariencia).FirstOrDefaultAsync() ?? throw new Exception("No se encontro la transparecia");
 
                 model.DeclaracionesDeBienes = data.DeclaracionesDeBienes;
                 model.InvolucradoEnEscandalos = data.InvolucradoEnEscandalos;
@@ -120,7 +120,7 @@ namespace Data.Repository.APICandidatosRepository
 
         public async Task<TransparienciaDTO> Get(long id)
         {
-            var transparenciaSelected = await _context.Transpariencias.Where(x => x.Active && x.IdTranspariencia == id).Select(c => new TransparienciaDTO
+            var transparenciaSelected = await _context.Transparencias.Where(x => x.Active && x.IdTranspariencia == id).Select(c => new TransparienciaDTO
             {
                 IdTranspariencia = c.IdTranspariencia,
                 DeclaracionesDeBienes = c.DeclaracionesDeBienes,
@@ -133,7 +133,7 @@ namespace Data.Repository.APICandidatosRepository
 
         public async Task<List<MostrarTransparienciaDTO>> GetAll()
         {
-            var transpariencia = await _context.Transpariencias.Where(x => x.Active).Select(c => new MostrarTransparienciaDTO
+            var transpariencia = await _context.Transparencias.Where(x => x.Active).Select(c => new MostrarTransparienciaDTO
             {
                 IdTranspariencia = c.IdTranspariencia,
                 DeclaracionesDeBienes = c.DeclaracionesDeBienes,
@@ -145,7 +145,7 @@ namespace Data.Repository.APICandidatosRepository
 
         public async Task<List<KeyValueDTO>> KeyValueTransparencia()
         {
-            var selectorTransparencia = await _context.Transpariencias.Where(x => x.Active).Select(c => new KeyValueDTO
+            var selectorTransparencia = await _context.Transparencias.Where(x => x.Active).Select(c => new KeyValueDTO
             {
                 Key = c.IdTranspariencia,
                 Value = c.DeclaracionesDeBienes,
