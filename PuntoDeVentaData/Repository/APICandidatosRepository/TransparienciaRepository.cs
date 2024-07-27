@@ -1,6 +1,7 @@
 ﻿using Data.Dto.PartidoPoliticoDTO;
 using Data.Dto.RedSocialDTO;
 using Data.Dto.TransparienciaDTO;
+using Data.Dto.UtilitiesDTO;
 using Data.Entities.PartidosPoliticos;
 using Data.Entities.Transpariencia;
 using Data.Interfaces.ApiCandidatosInterfaces;
@@ -140,6 +141,17 @@ namespace Data.Repository.APICandidatosRepository
                 EvaluacionesDeEtica = c.EvaluacionesDeEtica,
             }).ToListAsync();
             return transpariencia;
+        }
+
+        public async Task<List<KeyValueDTO>> KeyValueTransparencia()
+        {
+            var selectorTransparencia = await _context.Transpariencias.Where(x => x.Active).Select(c => new KeyValueDTO
+            {
+                Key = c.IdTranspariencia,
+                Value = c.DeclaracionesDeBienes,
+            }).ToListAsync();
+
+            return selectorTransparencia;
         }
 
 

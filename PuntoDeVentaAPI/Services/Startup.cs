@@ -202,6 +202,7 @@ namespace PuntoDeVentaAPI.Services
                         app.WithOrigins([
                             "http://localhost:5173",
                             "http://localhost:3000",
+                            "http://localhost:3001",
                             "https://qa.banacheck.apptelink.solutions", 
                             "https://banacheck.apptelink.solutions"
                         ])

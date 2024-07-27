@@ -1,4 +1,5 @@
 ﻿using Data.Dto.CargoDTO;
+using Data.Dto.UtilitiesDTO;
 using Data.Entities.Candidatos;
 using Data.Entities.Cargo;
 using Data.Interfaces.ApiCandidatosInterfaces;
@@ -138,6 +139,18 @@ namespace Data.Repository.APICandidatosRepository
 
             }).ToListAsync();
             return cargos;
+        }
+
+        public async Task<List<KeyValueDTO>> KeyValueCargo()
+        {
+            var selectorCargo = await _context.Cargos.Where(x => x.Active).Select(c => new KeyValueDTO
+            {
+                Key = c.IdCargo,
+                Value = c.Nombre,
+            }).ToListAsync();
+
+
+            return selectorCargo;
         }
     }
 }

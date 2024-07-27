@@ -1,5 +1,6 @@
 ﻿using Data.Dto.EventoDTO;
 using Data.Dto.PartidoPoliticoDTO;
+using Data.Dto.UtilitiesDTO;
 using PuntoDeVentaData.Dto.UtilitiesDTO;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace Data.Interfaces.ApiCandidatosInterfaces
     public interface PartidoInterface
     {
         public Task<List<PartidoDTO>> GetAll();
+        public Task<List<KeyValueDTO>> KeyValuePartido();
         public Task<PartidoDTO> Get(long id);
         public Task<MessageInfoDTO> Desactive(long id);
         public Task<MessageInfoDTO> Create(PartidoDTO data);

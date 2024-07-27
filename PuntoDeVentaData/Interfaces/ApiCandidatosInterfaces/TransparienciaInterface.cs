@@ -1,5 +1,6 @@
 ﻿using Data.Dto.RedSocialDTO;
 using Data.Dto.TransparienciaDTO;
+using Data.Dto.UtilitiesDTO;
 using PuntoDeVentaData.Dto.UtilitiesDTO;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,12 @@ namespace Data.Interfaces.ApiCandidatosInterfaces
     public interface TransparienciaInterface
     {
         public Task<List<MostrarTransparienciaDTO>> GetAll();
+        public Task<List<KeyValueDTO>> KeyValueTransparencia();
         public Task<TransparienciaDTO> Get(long id);
         public Task<MessageInfoDTO> Desactive(long id);
         public Task<MessageInfoDTO> Create(TransparienciaDTO data);
         public Task<MessageInfoDTO> Edit(TransparienciaDTO data);
+
 
 
     }

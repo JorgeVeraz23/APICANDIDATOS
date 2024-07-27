@@ -149,5 +149,22 @@ namespace PuntoDeVentaAPI.Controllers.PartidoController
                 return StatusCode((int)HttpStatusCode.BadRequest, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Errror al actualizar los partidos"));
             }
         }
+
+
+        [HttpGet]
+        [Route("KeyValuePartido")]
+        public async Task<ActionResult> KeyValuePartido()
+        {
+            try
+            {
+                var resultKeyValueCargo = await _partidoInterface.KeyValuePartido();
+                return Ok(resultKeyValueCargo);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Data.Dto.CargoDTO;
 using Data.Dto.PartidoPoliticoDTO;
+using Data.Dto.UtilitiesDTO;
 using Data.Entities.Cargo;
 using Data.Entities.PartidosPoliticos;
 using Data.Interfaces.ApiCandidatosInterfaces;
@@ -139,6 +140,17 @@ namespace Data.Repository.APICandidatosRepository
 
             }).ToListAsync();
             return partido;
+        }
+
+        public async Task<List<KeyValueDTO>> KeyValuePartido()
+        {
+            var selectorPartido = await _context.Partidos.Where(x => x.Active).Select(c => new KeyValueDTO
+            {
+                Key = c.IdPartido,
+                Value = c.NombrePartido
+            }).ToListAsync();
+
+            return selectorPartido;
         }
     }
 }

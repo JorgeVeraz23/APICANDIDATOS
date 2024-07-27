@@ -151,5 +151,22 @@ namespace PuntoDeVentaAPI.Controllers.TransparienciaController
                 return StatusCode((int)HttpStatusCode.BadRequest, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al actualizar la transpariencia"));
             }
         }
+
+
+        [HttpGet]
+        [Route("KeyValueTransparencia")]
+        public async Task<ActionResult> KeyValueTransparencia()
+        {
+            try
+            {
+                var resultKeyValueTransparencia = await _transparienciaInterface.KeyValueTransparencia();
+                return Ok(resultKeyValueTransparencia);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

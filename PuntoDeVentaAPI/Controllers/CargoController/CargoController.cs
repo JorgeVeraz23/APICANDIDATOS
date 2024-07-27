@@ -62,6 +62,21 @@ namespace PuntoDeVentaAPI.Controllers.CargoController
             }
         }
 
+        [HttpGet]
+        [Route("KeyValueCargo")]
+        public async Task<ActionResult> KeyValueCargo()
+        {
+            try
+            {
+                var resultKeyValueCargo = await _cargoInterface.KeyValueCargo();
+                return Ok(resultKeyValueCargo);
+
+            }catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         [HttpPost]
         [Route("CrearCargo")]
         public async Task<ActionResult> CrearCargo(CargoDTO cargo)
