@@ -1,5 +1,7 @@
-﻿using Data.Dto.ApoyoDTO;
+﻿using AutoMapper;
+using Data.Dto.ApoyoDTO;
 using Data.Dto.CandidatoDTO;
+using Data.Dto.PropuestaDTO;
 using Data.Dto.UtilitiesDTO;
 using Data.Entities.Apoyo;
 using Data.Entities.Candidatos;
@@ -24,6 +26,7 @@ namespace Data.Repository.APICandidatosRepository
     {
 
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
         private readonly IUnitOfWorkRepository _unit;
         private readonly IServiceProvider _serviceProvider;
@@ -33,7 +36,7 @@ namespace Data.Repository.APICandidatosRepository
         private readonly string _ip;
 
 
-        public CandidatoRepository(
+        public CandidatoRepository(IMapper mapper,
             ApplicationDbContext context,
             UserManager<ApplicationUser> userManager,
             IServiceProvider serviceProvider,
@@ -44,6 +47,7 @@ namespace Data.Repository.APICandidatosRepository
         {
             _context = context;
             _serviceProvider = serviceProvider;
+            _mapper = mapper;
             _configuration = configuration;
             _unit = unitOfWorkRepository;
 
@@ -149,6 +153,39 @@ namespace Data.Repository.APICandidatosRepository
             return candidatoSelected;
         }
 
+        public async Task<MostrarCandidatoConDetalleDTO> GetCandidatoConDetalle(long idCandidato)
+        {
+            var candidatoSelected = await _context.Candidatos
+                .Include(c => c.Propuestas)
+                .Include(c => c.Cargo)
+                .Include(c => c.Partido)
+                .Where(x => x.Active && x.IdCandidato == idCandidato)
+                .Select(c => new MostrarCandidatoConDetalleDTO
+                {
+                    IdCandidato = c.IdCandidato,
+                    NombreCandidato = c.NombreCandidato,
+                    Edad = c.Edad,
+                    FotoUrl = c.FotoUrl,
+                    LugarDeNacimiento = c.LugarDeNacimiento,
+                    InformacionDeContacto = c.InformacionDeContacto,
+                    NombrePartido = c.Partido!.NombrePartido,
+                    Cargo = c.Cargo!.Nombre,
+                    Propuestas = c.Propuestas!.Select(p => new PropuestaDTO
+                    {
+                        IdPropuesta = p.IdPropuesta,
+                        Descripción = p.Descripción,
+                        Titulo = p.Titulo,
+                    }).ToList(),
+                })
+                .FirstOrDefaultAsync();
+
+            if (candidatoSelected == null)
+            {
+                throw new Exception("Candidato no encontrado");
+            }
+
+            return candidatoSelected;
+        }
         public async Task<List<MostrarCandidatoDTO>> GetAll()
         {
             var candidatos = await _context.Candidatos.Where(x => x.Active).Select(c => new MostrarCandidatoDTO
@@ -176,5 +213,7 @@ namespace Data.Repository.APICandidatosRepository
 
             return cantidatoSelector;
         }
+
+        
     }
 }

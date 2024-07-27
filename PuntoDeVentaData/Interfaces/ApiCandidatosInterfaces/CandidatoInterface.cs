@@ -13,6 +13,7 @@ namespace Data.Interfaces.ApiCandidatosInterfaces
     public interface CandidatoInterface
     {
         public Task<List<MostrarCandidatoDTO>> GetAll();
+        public Task<MostrarCandidatoConDetalleDTO> GetCandidatoConDetalle(long idCandidato);
         public Task<List<KeyValueDTO>> KeyValue();
         public Task<CandidatoDTO> Get(long id);
         public Task<MessageInfoDTO> Desactive(long id);

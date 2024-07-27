@@ -120,6 +120,22 @@ namespace PuntoDeVentaAPI.Controllers.CandidatoController
         }
 
 
+        [HttpGet]
+        [Route("GetCandidatoConDetalles")]
+        public async Task<ActionResult> GetCandidatoConDetalles(long IdCandidato)
+        {
+            try
+            {
+                var result = await _candidatoInterface.GetCandidatoConDetalle(IdCandidato);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, new MessageInfoDTO().ErrorInterno(ex, _nombreController, "Error al consultar el candidato seleccionado"));
+            }
+        }
+
+
         [HttpDelete]
         [Route("EliminarCandidato")]
         public async Task<ActionResult> EliminarMotivo(long IdCandidato)
