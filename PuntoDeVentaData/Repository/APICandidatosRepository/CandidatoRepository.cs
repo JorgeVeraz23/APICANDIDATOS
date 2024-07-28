@@ -174,6 +174,7 @@ namespace Data.Repository.APICandidatosRepository
                     {
                         IdPropuesta = p.IdPropuesta,
                         Descripción = p.Descripción,
+                        Area = p.Area,
                         Titulo = p.Titulo,
                     }).ToList(),
                 })

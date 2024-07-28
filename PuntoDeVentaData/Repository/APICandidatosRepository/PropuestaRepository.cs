@@ -68,6 +68,7 @@ namespace Data.Repository.APICandidatosRepository
             Propuesta propuesta = new Propuesta();
             propuesta.Active = true;
             propuesta.Titulo = data.Titulo;
+            propuesta.Area = data.Area;
             propuesta.Descripción = data.Descripción;
             propuesta.IdCandidato = data.IdCandidato;
             propuesta.DateRegister = DateTime.Now;

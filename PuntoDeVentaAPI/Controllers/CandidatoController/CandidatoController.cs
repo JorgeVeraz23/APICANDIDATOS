@@ -50,6 +50,7 @@ namespace PuntoDeVentaAPI.Controllers.CandidatoController
 
         [HttpGet]
         [Route("GetAllCandidato")]
+        [AllowAnonymous] // Este endpoint permite el acceso anónimo
         public async Task<ActionResult> GetAllCandidato()
         {
             try
@@ -122,6 +123,7 @@ namespace PuntoDeVentaAPI.Controllers.CandidatoController
 
         [HttpGet]
         [Route("GetCandidatoConDetalles")]
+        [AllowAnonymous] // Este endpoint permite el acceso anónimo
         public async Task<ActionResult> GetCandidatoConDetalles(long IdCandidato)
         {
             try
